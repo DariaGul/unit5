@@ -6,7 +6,7 @@ public class Actor implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    String name;
+    private String name;
 
     public Actor(String name) {
         this.name = name;

@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class Film implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    String title;
-    Actor mainActor;
+    private String title;
+    private Actor mainActor;
 
     public Film(String name, Actor mainActor) {
         this.mainActor = mainActor;

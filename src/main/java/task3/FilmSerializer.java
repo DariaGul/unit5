@@ -13,18 +13,18 @@ public class FilmSerializer {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filename))) {
             objectOutputStream.writeObject(collectionFilm);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
-    public void deserialize(String filename) {
+    public List<Film> deserialize(String filename) {
         List<Film> listFilm = new ArrayList<>();
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filename))) {
             listFilm = (List<Film>) objectInputStream.readObject();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        listFilm.forEach(System.out::println);
+        return listFilm;
     }
 
 }

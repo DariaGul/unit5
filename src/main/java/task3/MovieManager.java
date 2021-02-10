@@ -5,10 +5,9 @@ import java.util.List;
 
 public class MovieManager {
 
-    private static final String FILE_NAME = "C:\\Users\\d.gulenkova\\IdeaProjects\\unit5\\collection_of_films.txt";
+    private static final String FILE_NAME = "./collection_of_films.txt";
 
     private FilmSerializer filmSerializer;
-    private List<Actor> actorList;
     private List<Film> collectionFilm;
 
     public MovieManager(FilmSerializer filmSerializer) {
@@ -16,13 +15,18 @@ public class MovieManager {
         createCollectionFilms();
     }
 
-    public void restoreCollectionFilms() {
-        filmSerializer.deserialize(FILE_NAME);
+    public List<Film> restoreCollectionFilms() {
+        List<Film> collectionFilms = filmSerializer.deserialize(FILE_NAME);
+        collectionFilms.forEach(System.out::println);
+        return collectionFilms;
     }
 
     public void modifyCollectionFilms(List<Film> newFilms) {
-        collectionFilm.addAll(newFilms);
-        saveCollectionFilms(collectionFilm);
+        System.out.println();
+        List<Film> currentCollection = restoreCollectionFilms();
+        currentCollection.addAll(newFilms);
+        saveCollectionFilms(currentCollection);
+        System.out.println();
         restoreCollectionFilms();
     }
 
@@ -35,8 +39,8 @@ public class MovieManager {
         return collectionFilm;
     }
 
-    public List<Actor> createActors() {
-        actorList = new ArrayList<>();
+    private List<Actor> createActors() {
+        List<Actor>  actorList = new ArrayList<>();
         actorList.add(new Actor("Александр Невский"));
         actorList.add(new Actor("Николас Кейдж"));
         actorList.add(new Actor("Джим Керри"));
@@ -45,7 +49,7 @@ public class MovieManager {
         return actorList;
     }
 
-    public List<Film> createCollectionFilms() {
+    private void createCollectionFilms() {
         collectionFilm = new ArrayList<>();
 
         List<Actor> actorList = createActors();
@@ -57,8 +61,6 @@ public class MovieManager {
         collectionFilm.add(new Film("Плетеный человек", actorList.get(1)));
         collectionFilm.add(new Film("Шоу Трумана", actorList.get(2)));
         collectionFilm.add(new Film("Комната", actorList.get(3)));
-
-        return collectionFilm;
     }
 
 }
